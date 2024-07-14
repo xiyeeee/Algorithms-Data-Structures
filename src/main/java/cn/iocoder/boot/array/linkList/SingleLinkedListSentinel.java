@@ -6,26 +6,20 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 
 /**
- * @Description
+ * /**
+ *
+ * @Description 带哨兵 的单链表
  * @Author xiye
- * @Date 2024/7/11
- * <p>
- * guan
+ * @Date 2024/7/15
  */
-/*
- 关于类中 什么时候加static , 经验 , 如果一个一个静态类中与外部的成员变量
- 那他就不能使用static修饰
- * */
-public class SingleLinkedList implements Iterable<Integer> {
-    /**
-     *
-     */
-    private Node head;
+public class SingleLinkedListSentinel implements Iterable<Integer> {
+
+    private Node head = new Node(5, null);
 
     @Override
     public Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
-            Node p = head;
+            Node p = head.next;
 
             @Override
             public boolean hasNext() {
@@ -61,7 +55,7 @@ public class SingleLinkedList implements Iterable<Integer> {
     }
 
     public void loop1(Consumer<Integer> consumer) {
-        Node p = head;
+        Node p = head.next;
         while (p != null) {
             consumer.accept(p.value);
             p = p.next;
@@ -69,7 +63,7 @@ public class SingleLinkedList implements Iterable<Integer> {
     }
 
     public void loop2(Consumer<Integer> consumer) {
-        for (Node p = head; p != null; p = p.next) {
+        for (Node p = head.next; p != null; p = p.next) {
             consumer.accept(p.value);
 
         }
@@ -89,26 +83,22 @@ public class SingleLinkedList implements Iterable<Integer> {
     }
 
     /**
-     * @Description 尾插法
+     * @Description 尾插法  有哨兵的存在， 不会有空的情况
      * @Author xiye
      * @Date
      */
     public void addLast(int value) {
         Node last = findLast();
-        if (last == null) {
-            addFirst(value);
-            return;
-        }
         last.next = new Node(value, null);
     }
 
     /**
-     * @Description
+     * @Description 如果有哨兵 ，索引需要在-1位置
      * @Author xiye
      * @Date
      */
     private Node getNode(int index) {
-        int i = 0;
+        int i = -1; //
         for (Node p = head; p != null; p = p.next, i++) {
             if (i == index) {
                 return p;
@@ -135,10 +125,6 @@ public class SingleLinkedList implements Iterable<Integer> {
      * @Date
      */
     public void insertNode(int index, int value) {
-        if (index == 0) {
-            addFirst(value);
-            return;
-        }
         Node pre = getNode(index - 1);
         if (pre == null) {
             throw new IllegalArgumentException(
@@ -190,5 +176,4 @@ public class SingleLinkedList implements Iterable<Integer> {
 
 
     }
-
 }

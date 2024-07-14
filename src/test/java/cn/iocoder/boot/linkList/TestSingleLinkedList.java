@@ -62,9 +62,36 @@ public class TestSingleLinkedList {
         singleLinkedList.addLast(3);
         int i = singleLinkedList.getNodeValue(1);
 
-        System.out.println(i);
+//        System.out.println(i);
 //        int j = singleLinkedList.getNodeValue(10);
 //        System.out.println(j);
+    }
+
+    @Test
+    public void testInsertNode() {
+        SingleLinkedList singleLinkedList = new SingleLinkedList();
+        singleLinkedList.addLast(1);
+        singleLinkedList.addLast(2);
+        singleLinkedList.addLast(3);
+        singleLinkedList.insertNode(1, 2);
+        singleLinkedList.deleteFirst(); // 测试删除
+        for (Integer i : singleLinkedList) {
+//            System.out.println(i);
+        }
+    }
+
+    @Test
+    public void testDeleteNode() {
+        SingleLinkedList singleLinkedList = new SingleLinkedList();
+        singleLinkedList.addLast(1);
+        singleLinkedList.addLast(2);
+        singleLinkedList.addLast(3);
+        singleLinkedList.insertNode(1, 2);
+        singleLinkedList.deleteNode(0); // 测试删除
+        singleLinkedList.deleteNode(2); // 测试删除
+        for (Integer i : singleLinkedList) {
+            System.out.println(i);
+        }
     }
 
 }
