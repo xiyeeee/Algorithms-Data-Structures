@@ -19,4 +19,13 @@ public class TestInsertSort {
             System.out.println(j);
         }
     }
+
+    @Test
+    public void test2() {
+        int[] arr = {1, 3, 2, 2, 1};
+        InsertSort.sort(arr);
+        for (int j : arr) {
+            System.out.println(j);
+        }
+    }
 }

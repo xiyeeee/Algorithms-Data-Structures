@@ -9,6 +9,7 @@ package cn.iocoder.boot.array.Sort;
 
 public class InsertSort {
     public static void sort(int[] arr) {
+        insertAgain(arr, 1);
     }
 
     /**
@@ -27,6 +28,20 @@ public class InsertSort {
             }
             arr[j + 1] = key;
         }
+    }
+
+    public static void insertAgain(int[] arr, int low) {
+        if (low == arr.length) return;
+
+        int t = arr[low]; // 未排序值
+        int i = low - 1;
+        while (i >= 0 && arr[i] > t) {
+            arr[i + 1] = arr[i];
+            i--;
+        }
+        arr[i + 1] = t;
+
+        insertAgain(arr, low + 1);
     }
 
 }
